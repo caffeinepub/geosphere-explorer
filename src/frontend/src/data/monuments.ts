@@ -8326,4 +8326,49 @@ export const LOCAL_MONUMENTS: Monument[] = [
     imageUrl:
       "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Bhangarh_Fort.jpg/1200px-Bhangarh_Fort.jpg",
   },
+  {
+    id: 1446,
+    name: "Mohenjo-daro",
+    city: "Larkana",
+    country: "Pakistan",
+    latitude: 27.3244,
+    longitude: 68.1375,
+    category: "Monument",
+    description:
+      "Mohenjo-daro is one of the largest and best-preserved ancient cities of the Indus Valley Civilisation, dating back to around 2500 BCE. Often called the 'Mound of the Dead,' it features remarkable urban planning with grid-patterned streets, advanced drainage systems, and the famous Great Bath — an early public water tank.",
+    history:
+      "Mohenjo-daro was built around 2500 BCE and thrived for nearly a thousand years as a major urban center of the ancient Indus Valley Civilisation. Rediscovered in the 1920s by archaeologist R.D. Banerji, it revealed a sophisticated Bronze Age city with standardised weights, seals, and sanitation infrastructure unmatched for its time. The city was mysteriously abandoned around 1900 BCE, with theories ranging from flooding and climate change to invasion. It is a UNESCO World Heritage Site.",
+    imageUrl:
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Mohenjodaro_Priesterkoenig.jpeg/800px-Mohenjodaro_Priesterkoenig.jpeg",
+  },
+  {
+    id: 1447,
+    name: "Ziro Valley",
+    city: "Ziro",
+    country: "India",
+    latitude: 27.5445,
+    longitude: 93.8255,
+    category: "Viewpoint",
+    description:
+      "Ziro Valley is a serene, UNESCO-tentative World Heritage landscape in the Lower Subansiri district of Arunachal Pradesh, famous for its lush pine-covered hills, paddy fields, and the Apatani tribe's unique culture. It is also home to the Ziro Music Festival, one of India's most beloved outdoor music events.",
+    history:
+      "Ziro has been inhabited by the Apatani tribe for centuries, who developed a sophisticated wet rice cultivation and fish farming system without the use of heavy tools or irrigation dams — a practice still in use today. The valley was first documented by British colonial officers in the early 20th century. In 2014, the Apatani Cultural Landscape was submitted for UNESCO World Heritage consideration for its extraordinary cultural and ecological traditions.",
+    imageUrl:
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/Ziro_Valley%2C_Arunachal_Pradesh%2C_India.jpg/800px-Ziro_Valley%2C_Arunachal_Pradesh%2C_India.jpg",
+  },
+  {
+    id: 1448,
+    name: "Nubra Valley",
+    city: "Diskit",
+    country: "India",
+    latitude: 34.6827,
+    longitude: 77.5619,
+    category: "Viewpoint",
+    description:
+      "Nubra Valley is a high-altitude cold desert valley in Ladakh, India, nestled between the Karakoram and Ladakh mountain ranges. Famous for its double-humped Bactrian camels, sand dunes at Hunder, ancient Diskit Monastery, and the Shyok River, it offers a surreal contrast of towering snow peaks and golden dunes.",
+    history:
+      "Nubra Valley was an important route on the ancient Silk Road, connecting Central Asia to the Indian subcontinent via the Karakoram Pass. The region has been ruled by the Nubra Kingdom and later the Dogra rulers of Jammu. The Diskit Monastery, dating back over 600 years, remains a key spiritual centre of Tibetan Buddhism. The valley was opened to tourists with an Inner Line Permit only in 1994.",
+    imageUrl:
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Nubra_Valley_Ladakh.jpg/800px-Nubra_Valley_Ladakh.jpg",
+  },
 ];
