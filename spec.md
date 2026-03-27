@@ -1,38 +1,23 @@
 # GeoSphere Explorer
 
 ## Current State
-New project — blank scaffold with empty Motoko actor and no frontend code.
+The app launches directly into the globe/map explorer (AppContent). There is no landing/splash page. The header shows the GeoSphere Explorer logo inline.
 
 ## Requested Changes (Diff)
 
 ### Add
-- Interactive 3D Earth globe (Three.js / React Three Fiber) with realistic texture, atmosphere glow, imaginary lines (lat/lng grid), country/state/city labels at zoom levels
-- Famous world monuments dataset: ~50+ monuments with name, location (lat/lng), mini photo URL, description, history, category
-- Search bar to find cities/places and show monument pop-ups with mini photos
-- Monument detail panel: full description, history, photo, and action buttons
-- 2D Map view using Leaflet + OpenStreetMap tiles
-- Satellite view using Leaflet satellite tile layer
-- Street view embed panel (Google Street View via embed URL)
-- Zoom in/out slider control
-- Compass widget at bottom-right showing cardinal directions
-- Coordinates display at bottom-left showing hovered lat/lng
-- Transport route planner: select monument as destination, show route from user's live GPS location by TRAIN, BUS, FLIGHT, CAR, MOTORCYCLE
-- Map/Satellite view toggle
-- Dark cozy space theme with glassmorphism panels, amber accents
+- LandingPage component: full-screen with auto-cycling slideshow of monument background photos, app logo (yellow globe) centered at top, large app name "GeoSphere Explorer" below it, tagline, and a "Start Exploring" CTA button that transitions the user to the globe view.
+- Use real monument photo URLs (Wikimedia/Unsplash) for the slideshow: Taj Mahal, Eiffel Tower, Machu Picchu, Colosseum, Great Wall, Angkor Wat, Petra, Pyramids of Giza.
+- Smooth fade transition between landing page and globe view.
 
 ### Modify
-- Nothing (new project)
+- App.tsx: add `showLanding` boolean state (default true). When true, render LandingPage; when false, render AppContent.
+- When "Start Exploring" is clicked, animate out the landing page and animate in the globe.
 
 ### Remove
-- Nothing
+- Nothing removed.
 
 ## Implementation Plan
-1. Backend: store monuments data (name, coords, description, history, category, imageUrl)
-2. Backend: query monuments by text search, by proximity
-3. Frontend: Three.js globe with earth texture, atmosphere, grid lines, country labels, monument pins
-4. Frontend: Leaflet 2D map / satellite toggle
-5. Frontend: Search bar with autocomplete
-6. Frontend: Monument detail modal (photo, description, history, street view iframe)
-7. Frontend: Route planner UI with transport mode tabs and drawn route on map
-8. Frontend: Zoom slider, compass, coordinates overlay
-9. Frontend: Dark glassmorphism theme
+1. Create `src/frontend/src/components/LandingPage.tsx` with slideshow, logo, title, and CTA button.
+2. Modify `App.tsx` to conditionally render LandingPage or AppContent based on state.
+3. Use the generated logo at `/assets/generated/geosphere-logo-transparent.dim_200x200.png`.

@@ -1,4 +1,88 @@
+import { useCallback, useEffect, useRef, useState } from "react";
+
+function getCardinalLabel(heading: number): string {
+  const dirs = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"];
+  const idx = Math.round(heading / 45) % 8;
+  return dirs[idx];
+}
+
+type PermissionState = "unknown" | "granted" | "denied" | "pending";
+
 export function Compass() {
+  const [heading, setHeading] = useState(0);
+  const [hasOrientation, setHasOrientation] = useState(false);
+  const [permission, setPermission] = useState<PermissionState>("unknown");
+  const listenersAdded = useRef(false);
+
+  const addListeners = useCallback(() => {
+    if (listenersAdded.current) return;
+    listenersAdded.current = true;
+
+    const onOrientation = (
+      e: DeviceOrientationEvent & {
+        webkitCompassHeading?: number;
+        absolute?: boolean;
+      },
+    ) => {
+      if (e.webkitCompassHeading != null) {
+        setHeading(e.webkitCompassHeading);
+        setHasOrientation(true);
+        return;
+      }
+      if (e.alpha != null) {
+        setHeading((360 - e.alpha) % 360);
+        setHasOrientation(true);
+      }
+    };
+
+    const handler = (e: Event) =>
+      onOrientation(
+        e as DeviceOrientationEvent & {
+          webkitCompassHeading?: number;
+          absolute?: boolean;
+        },
+      );
+
+    window.addEventListener("deviceorientationabsolute", handler, true);
+    window.addEventListener("deviceorientation", handler, true);
+  }, []);
+
+  useEffect(() => {
+    const DevOrEvent = DeviceOrientationEvent as unknown as {
+      requestPermission?: () => Promise<string>;
+    };
+    if (typeof DevOrEvent.requestPermission !== "function") {
+      setPermission("granted");
+      addListeners();
+    }
+  }, [addListeners]);
+
+  const requestPermission = useCallback(() => {
+    const DevOrEvent = DeviceOrientationEvent as unknown as {
+      requestPermission?: () => Promise<string>;
+    };
+    if (typeof DevOrEvent.requestPermission === "function") {
+      setPermission("pending");
+      DevOrEvent.requestPermission()
+        .then((state: string) => {
+          if (state === "granted") {
+            setPermission("granted");
+            addListeners();
+          } else {
+            setPermission("denied");
+          }
+        })
+        .catch(() => setPermission("denied"));
+    }
+  }, [addListeners]);
+
+  const needsTap =
+    typeof (
+      DeviceOrientationEvent as unknown as { requestPermission?: unknown }
+    ).requestPermission === "function" && permission === "unknown";
+
+  const cardinalLabel = getCardinalLabel(heading);
+
   return (
     <div
       className="flex flex-col items-center gap-1 glass-panel rounded-2xl p-3"
@@ -8,12 +92,21 @@ export function Compass() {
       <div className="text-xs font-medium mb-1" style={{ color: "#6E7F99" }}>
         Compass
       </div>
-      <div className="relative w-12 h-12">
+
+      <button
+        type="button"
+        className="relative w-12 h-12 bg-transparent border-0 p-0 cursor-pointer"
+        onClick={needsTap ? requestPermission : undefined}
+        title={needsTap ? "Tap to enable compass" : undefined}
+      >
         <svg
           viewBox="0 0 48 48"
           className="w-full h-full"
-          role="img"
           aria-label="Compass rose"
+          style={{
+            transform: `rotate(${-heading}deg)`,
+            transition: "transform 0.15s ease-out",
+          }}
         >
           <title>Compass Rose</title>
           <circle
@@ -91,9 +184,44 @@ export function Compass() {
             );
           })}
         </svg>
-      </div>
-      <div className="text-xs font-mono" style={{ color: "#A9B6C9" }}>
-        N
+      </button>
+
+      <div className="flex flex-col items-center gap-0.5">
+        <div
+          className="text-xs font-mono font-bold"
+          style={{ color: hasOrientation ? "#EAF0F8" : "#6E7F99" }}
+        >
+          {hasOrientation ? cardinalLabel : "N"}
+        </div>
+        {hasOrientation && (
+          <div className="text-[9px] font-mono" style={{ color: "#6E7F99" }}>
+            {Math.round(heading)}°
+          </div>
+        )}
+        {needsTap && (
+          <div
+            className="text-[8px] text-center leading-tight"
+            style={{ color: "#6E7F99" }}
+          >
+            tap to enable
+          </div>
+        )}
+        {permission === "pending" && (
+          <div
+            className="text-[8px] text-center leading-tight"
+            style={{ color: "#F4B23C" }}
+          >
+            allow it
+          </div>
+        )}
+        {permission === "denied" && (
+          <div
+            className="text-[8px] text-center leading-tight"
+            style={{ color: "#EF4444" }}
+          >
+            denied
+          </div>
+        )}
       </div>
     </div>
   );
