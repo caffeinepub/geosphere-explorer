@@ -316,7 +316,11 @@ function createGridLines(): THREE.BufferGeometry {
   return geom;
 }
 
-function UserLocationPin({ lat, lng }: { lat: number; lng: number }) {
+function UserLocationPin({
+  lat,
+  lng,
+  zoom,
+}: { lat: number; lng: number; zoom: number }) {
   const meshRef = useRef<THREE.Mesh>(null);
   const ringRef = useRef<THREE.Mesh>(null);
   const pos = latLngToVec3(lat, lng, 1.025);
@@ -353,12 +357,12 @@ function UserLocationPin({ lat, lng }: { lat: number; lng: number }) {
         />
       </mesh>
       {/* Label */}
-      <Html center distanceFactor={4} position={[0, 0.03, 0]}>
+      <Html center position={[0, 0.03, 0]}>
         <div
           style={{
             background: "rgba(79,195,247,0.9)",
             color: "#fff",
-            fontSize: "6px",
+            fontSize: zoom > 2.0 ? "4px" : "3px",
             fontWeight: "700",
             fontFamily: "Inter, sans-serif",
             padding: "1px 4px",
@@ -574,11 +578,11 @@ function Earth({
       {COUNTRY_LABELS.map((c) => {
         const labelPos = latLngToVec3(c.lat, c.lng, 1.12);
         return (
-          <Html key={c.name} position={labelPos} center distanceFactor={3.5}>
+          <Html key={c.name} position={labelPos} center>
             <div
               style={{
                 color: "rgba(255,255,255,0.7)",
-                fontSize: "3px",
+                fontSize: zoom > 2.0 ? "4px" : "3px",
                 fontWeight: "600",
                 fontFamily: "Inter, sans-serif",
                 letterSpacing: "1px",
@@ -596,11 +600,11 @@ function Earth({
         STATE_LABELS.map((s) => {
           const labelPos = latLngToVec3(s.lat, s.lng, 1.06);
           return (
-            <Html key={s.name} position={labelPos} center distanceFactor={5}>
+            <Html key={s.name} position={labelPos} center>
               <div
                 style={{
                   color: "rgba(180,220,255,0.75)",
-                  fontSize: "3px",
+                  fontSize: zoom > 2.0 ? "4px" : "3px",
                   fontWeight: "500",
                   fontFamily: "Inter, sans-serif",
                   letterSpacing: "0.5px",
@@ -618,7 +622,7 @@ function Earth({
         CITY_LABELS.map((c) => {
           const labelPos = latLngToVec3(c.lat, c.lng, 1.04);
           return (
-            <Html key={c.name} position={labelPos} center distanceFactor={7}>
+            <Html key={c.name} position={labelPos} center>
               <div
                 style={{
                   textAlign: "center",
@@ -629,7 +633,7 @@ function Earth({
                 <div
                   style={{
                     color: "rgba(255,255,255,0.85)",
-                    fontSize: "3px",
+                    fontSize: zoom > 2.0 ? "4px" : "3px",
                     fontWeight: 500,
                     fontFamily: "Inter, sans-serif",
                     textShadow: "0 0 3px rgba(0,0,0,0.9)",
@@ -642,7 +646,7 @@ function Earth({
                   <div
                     style={{
                       color: "rgba(200,220,255,0.65)",
-                      fontSize: "3px",
+                      fontSize: zoom > 2.0 ? "4px" : "3px",
                       fontWeight: 400,
                       fontFamily: "serif",
                       textShadow: "0 0 3px rgba(0,0,0,0.9)",
@@ -657,7 +661,11 @@ function Earth({
           );
         })}
       {userLocation && (
-        <UserLocationPin lat={userLocation.lat} lng={userLocation.lng} />
+        <UserLocationPin
+          lat={userLocation.lat}
+          lng={userLocation.lng}
+          zoom={zoom}
+        />
       )}
     </group>
   );
@@ -1067,7 +1075,7 @@ function ZoomSlider({
             width: "120px",
             height: "4px",
             transform: "rotate(-90deg)",
-            transformOrigin: "center center",
+            transformOrigin: "center",
             cursor: "pointer",
             accentColor: "#4a9eff",
             background: "transparent",
