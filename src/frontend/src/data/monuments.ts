@@ -8371,4 +8371,199 @@ export const LOCAL_MONUMENTS: Monument[] = [
     imageUrl:
       "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Nubra_Valley_Ladakh.jpg/800px-Nubra_Valley_Ladakh.jpg",
   },
+  {
+    id: 1449,
+    name: "Arc de Triomphe",
+    city: "Paris",
+    country: "France",
+    latitude: 48.8738,
+    longitude: 2.295,
+    category: "Monument",
+    description:
+      "The Arc de Triomphe is one of the most iconic landmarks in Paris, standing at the centre of the Place Charles de Gaulle at the western end of the Champs-Élysées. It honours those who fought and died for France in the French Revolutionary and Napoleonic Wars, with the names of all French victories and generals inscribed on its inner and outer surfaces.",
+    history:
+      "Commissioned by Napoleon I after his victory at Austerlitz in 1806, the Arc de Triomphe was designed by architect Jean Chalgrin in Neoclassical style. Construction was interrupted and resumed several times, and it was finally completed in 1836 under King Louis-Philippe. On 11 November 1920, the Tomb of the Unknown Soldier was placed beneath the arch, with an eternal flame that has burned ever since.",
+    imageUrl:
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Arc_de_Triomphe%2C_Paris_21_October_2010.jpg/800px-Arc_de_Triomphe%2C_Paris_21_October_2010.jpg",
+  },
+  {
+    id: 1450,
+    name: "The Louvre",
+    city: "Paris",
+    country: "France",
+    latitude: 48.8606,
+    longitude: 2.3376,
+    category: "Museum",
+    description:
+      "The Louvre is the world's largest art museum and a historic monument in Paris. Home to over 38,000 objects including the Mona Lisa, Venus de Milo, and Winged Victory of Samothrace, it attracts nearly 10 million visitors per year, making it the most visited museum in the world.",
+    history:
+      "Originally built as a fortress in the late 12th century under Philip II, the Louvre was converted into a royal palace in the 16th century. It was opened as a public museum in 1793 during the French Revolution. The iconic glass pyramid entrance was added in 1989 by architect I.M. Pei.",
+    imageUrl:
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Louvre_Museum_Wikimedia_Commons.jpg/800px-Louvre_Museum_Wikimedia_Commons.jpg",
+  },
+  {
+    id: 1451,
+    name: "The British Museum",
+    city: "London",
+    country: "United Kingdom",
+    latitude: 51.5194,
+    longitude: -0.127,
+    category: "Museum",
+    description:
+      "The British Museum is a public institution dedicated to human history, art, and culture. Its permanent collection of around 8 million works is among the largest in the world, including the Rosetta Stone, the Elgin Marbles, and Egyptian mummies.",
+    history:
+      "Founded in 1753, the British Museum was the first public national museum in the world. It was established from the collections of physician and scientist Sir Hans Sloane. The museum opened to the public in 1759 in Montague House and moved to its current neoclassical building in Bloomsbury in the early 19th century.",
+    imageUrl:
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/British_Museum_from_NE_2.JPG/800px-British_Museum_from_NE_2.JPG",
+  },
+  {
+    id: 1452,
+    name: "The Metropolitan Museum of Art",
+    city: "New York City",
+    country: "United States",
+    latitude: 40.7794,
+    longitude: -73.9632,
+    category: "Museum",
+    description:
+      "The Metropolitan Museum of Art, colloquially known as the Met, is the largest art museum in the Americas. Its permanent collection contains over two million works spanning 5,000 years of world culture, from prehistoric to contemporary art.",
+    history:
+      "Founded in 1870 by a group of American citizens including businessmen and financiers, the Met opened its doors to the public in 1872. The museum moved to its current location on Fifth Avenue along Central Park in 1880. It has since expanded to cover more than two million square feet.",
+    imageUrl:
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Metropolitan_Museum_of_Art_%28The_Met%29_-_Central_Park%2C_NYC.jpg/800px-Metropolitan_Museum_of_Art_%28The_Met%29_-_Central_Park%2C_NYC.jpg",
+  },
+  {
+    id: 1453,
+    name: "The Vatican Museums",
+    city: "Vatican City",
+    country: "Vatican",
+    latitude: 41.9065,
+    longitude: 12.4536,
+    category: "Museum",
+    description:
+      "The Vatican Museums are Christian and art museums located within the Vatican City. They display works from the extensive collection amassed by the Catholic Church and Popes throughout the centuries, including the Sistine Chapel with Michelangelo's famous ceiling frescoes.",
+    history:
+      "Founded by Pope Julius II in the early 16th century, the Vatican Museums began with the display of a small collection of classical sculptures in the Belvedere Courtyard. Over centuries, the collection grew enormously through commissions, purchases, and gifts to the Church. The Sistine Chapel, painted by Michelangelo between 1508 and 1512, remains the most celebrated space.",
+    imageUrl:
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Sistine_Chapel_ceiling_photo_2.jpg/800px-Sistine_Chapel_ceiling_photo_2.jpg",
+  },
+  {
+    id: 1454,
+    name: "The Hermitage Museum",
+    city: "Saint Petersburg",
+    country: "Russia",
+    latitude: 59.9399,
+    longitude: 30.3146,
+    category: "Museum",
+    description:
+      "The State Hermitage Museum in Saint Petersburg is one of the largest and oldest museums in the world. It houses a collection of over 3 million items including the largest collection of paintings in the world, antiquities, weapons, coins, and applied art.",
+    history:
+      "Founded in 1764 by Empress Catherine the Great when she purchased a collection of 255 paintings from the Berlin merchant Johann Ernst Gotzkowski, the Hermitage was originally a private collection. It was opened to the public in 1852. The museum is housed in the Winter Palace and several adjacent buildings along the Neva River.",
+    imageUrl:
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Hermitage_museum_2007.jpg/800px-Hermitage_museum_2007.jpg",
+  },
+  {
+    id: 1455,
+    name: "The Prado Museum",
+    city: "Madrid",
+    country: "Spain",
+    latitude: 40.4138,
+    longitude: -3.6921,
+    category: "Museum",
+    description:
+      "The Museo del Prado is Spain's national art museum and one of the finest art galleries in the world. Its collection of European art spans from the 12th century to the early 20th century, including masterpieces by Velázquez, Goya, El Greco, Titian, and Rubens.",
+    history:
+      "The Prado was conceived by Charles III in the 18th century and originally designed by Juan de Villanueva as a natural science museum. It was opened as an art museum in 1819 by King Ferdinand VII. The royal collection of Spanish and European art formed the core of its holdings.",
+    imageUrl:
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Museo_del_Prado_2016_%2825185969599%29.jpg/800px-Museo_del_Prado_2016_%2825185969599%29.jpg",
+  },
+  {
+    id: 1456,
+    name: "Uffizi Gallery",
+    city: "Florence",
+    country: "Italy",
+    latitude: 43.7678,
+    longitude: 11.2553,
+    category: "Museum",
+    description:
+      "The Uffizi Gallery is one of the oldest and most famous art museums in the world, located in Florence, Italy. It holds an unparalleled collection of Italian Renaissance art, including Botticelli's The Birth of Venus and Primavera, Leonardo da Vinci's Annunciation, and works by Michelangelo and Raphael.",
+    history:
+      "The Uffizi was built between 1560 and 1581 by Giorgio Vasari on order of Cosimo I de' Medici, Grand Duke of Tuscany, to house the offices (uffizi) of Florentine magistrates. The Medici family's vast art collection was later bequeathed to the city of Florence, and the gallery opened to the public in 1769.",
+    imageUrl:
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Uffizi_Firenze.jpg/800px-Uffizi_Firenze.jpg",
+  },
+  {
+    id: 1457,
+    name: "Smithsonian National Museum of Natural History",
+    city: "Washington D.C.",
+    country: "United States",
+    latitude: 38.8913,
+    longitude: -77.0261,
+    category: "Museum",
+    description:
+      "The Smithsonian National Museum of Natural History is one of the most visited natural history museums in the world. It houses 146 million specimens including the Hope Diamond, ancient fossils, meteorites, and exhibits on human origins.",
+    history:
+      "Opened in 1910, the museum is part of the Smithsonian Institution, the world's largest museum and research complex. It was established to preserve and exhibit natural history collections and educate the public about the natural world and human history.",
+    imageUrl:
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Smithsonian_Natural_History_Museum.JPG/800px-Smithsonian_Natural_History_Museum.JPG",
+  },
+  {
+    id: 1458,
+    name: "National Museum of China",
+    city: "Beijing",
+    country: "China",
+    latitude: 39.9056,
+    longitude: 116.4075,
+    category: "Museum",
+    description:
+      "The National Museum of China is the largest museum in the world by floor area. Located on the east side of Tiananmen Square in Beijing, it focuses on the history and art of China, housing over 1.4 million artefacts spanning 5,000 years of Chinese civilization.",
+    history:
+      "The museum was founded in 1912, shortly after the establishment of the Republic of China. It was reorganised and significantly expanded in 2003 by merging the National Museum of Chinese History and the Museum of the Chinese Revolution. The current building was completed in 2011.",
+    imageUrl:
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/National_Museum_of_China.jpg/800px-National_Museum_of_China.jpg",
+  },
+  {
+    id: 1459,
+    name: "The Egyptian Museum",
+    city: "Cairo",
+    country: "Egypt",
+    latitude: 30.0478,
+    longitude: 31.2336,
+    category: "Museum",
+    description:
+      "The Egyptian Museum in Cairo houses the world's largest collection of ancient Egyptian antiquities, with over 120,000 items. Highlights include the treasures of Tutankhamun, royal mummies, and the Narmer Palette.",
+    history:
+      "Opened in 1902, the Egyptian Museum was built by the French architect Marcel Dourgnon in a neoclassical style on Tahrir Square. The museum was established to house the growing collection of Egyptian antiquities discovered through archaeological excavations. A new Grand Egyptian Museum is under construction near the Pyramids of Giza.",
+    imageUrl:
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Egyptian_Museum%2C_Cairo%2C_Egypt.jpg/800px-Egyptian_Museum%2C_Cairo%2C_Egypt.jpg",
+  },
+  {
+    id: 1460,
+    name: "The Rijksmuseum",
+    city: "Amsterdam",
+    country: "Netherlands",
+    latitude: 52.36,
+    longitude: 4.8852,
+    category: "Museum",
+    description:
+      "The Rijksmuseum is the Netherlands' national museum dedicated to Dutch arts and history. Its collection includes masterpieces by Rembrandt, Vermeer, and Van Dyck, most famously Rembrandt's The Night Watch.",
+    history:
+      "Originally established in The Hague in 1800 and moved to Amsterdam in 1808 under Louis Napoleon, the Rijksmuseum has been in its current Gothic/Renaissance Revival building since 1885. The building was designed by Pierre Cuypers. After a major renovation lasting from 2003 to 2013, the museum reopened with a modernised interior.",
+    imageUrl:
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Rijksmuseum_Amsterdam_-_2016.jpg/800px-Rijksmuseum_Amsterdam_-_2016.jpg",
+  },
+  {
+    id: 1461,
+    name: "The National Museum of India",
+    city: "New Delhi",
+    country: "India",
+    latitude: 28.612,
+    longitude: 77.2195,
+    category: "Museum",
+    description:
+      "The National Museum of India in New Delhi is one of the largest museums in India, housing a diverse collection of over 200,000 works of art covering 5,000 years of cultural heritage. It includes artefacts from the Indus Valley Civilisation, Mughal era, and rare manuscripts.",
+    history:
+      "Established in 1949, the National Museum of India was formally inaugurated in 1960. The collection originated from an exhibition of Indian art held in London's Burlington House in 1947-1948, right around the time of Indian Independence. The museum building was designed by architect G.B. Deolalikar.",
+    imageUrl:
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/National_Museum_New_Delhi.jpg/800px-National_Museum_New_Delhi.jpg",
+  },
 ];

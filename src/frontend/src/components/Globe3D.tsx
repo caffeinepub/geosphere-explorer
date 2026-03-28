@@ -435,6 +435,12 @@ function getCategoryStyle(category: string): {
     };
   if (cat === "desert")
     return { color: "#E8A835", geometry: "torus", args: [0.009, 0.003, 8, 16] };
+  if (cat === "museum")
+    return {
+      color: "#F5F5F0",
+      geometry: "cylinder",
+      args: [0.005, 0.005, 0.012, 6],
+    };
   return { color: "#F4E04D", geometry: "sphere", args: [0.006, 8, 8] };
 }
 
@@ -879,6 +885,7 @@ const LEGEND_ITEMS = [
   { color: "#40E0D0", shape: "circle", label: "Beach / Sea / Ocean" },
   { color: "#F4E04D", shape: "circle", label: "Monument / Historic Site" },
   { color: "#E8A835", shape: "ring", label: "Desert" },
+  { color: "#F5F5F0", shape: "pillar", label: "Museum" },
 ];
 
 function MapLegend() {
@@ -1001,6 +1008,18 @@ function LegendSymbol({ color, shape }: { color: string; shape: string }) {
           borderRadius: "50%",
           border: `2px solid ${color}`,
           background: "transparent",
+          flexShrink: 0,
+        }}
+      />
+    );
+  if (shape === "pillar")
+    return (
+      <div
+        style={{
+          width: "6px",
+          height: "12px",
+          background: color,
+          borderRadius: "2px",
           flexShrink: 0,
         }}
       />
