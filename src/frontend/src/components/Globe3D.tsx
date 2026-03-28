@@ -1,6 +1,13 @@
 import { Html, useTexture } from "@react-three/drei";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { Suspense, useCallback, useEffect, useRef, useState } from "react";
+import {
+  Suspense,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import * as THREE from "three";
 import type { Monument } from "../types";
 
@@ -515,6 +522,7 @@ interface EarthProps {
   targetZoom?: React.MutableRefObject<number>;
   onZoomChange?: (v: number) => void;
   userLocation?: { lat: number; lng: number } | null;
+  routeLine?: [[number, number], [number, number]] | null;
 }
 
 function Earth({
@@ -525,6 +533,7 @@ function Earth({
   cameraDistance,
   rotation,
   userLocation,
+  routeLine,
 }: EarthProps) {
   const earthRef = useRef<THREE.Mesh>(null);
   const groupRef = useRef<THREE.Group>(null);
@@ -673,7 +682,81 @@ function Earth({
           zoom={zoom}
         />
       )}
+      <GreatCircleArc routeLine={routeLine ?? null} />
     </group>
+  );
+}
+
+function GreatCircleArc({
+  routeLine,
+}: { routeLine: [[number, number], [number, number]] | null }) {
+  const geo = useMemo(() => {
+    if (!routeLine) return null;
+    const [[lat1, lng1], [lat2, lng2]] = routeLine;
+    const v1 = latLngToVec3(lat1, lng1, 1.0).normalize();
+    const v2 = latLngToVec3(lat2, lng2, 1.0).normalize();
+    const steps = 100;
+    const points: THREE.Vector3[] = [];
+    for (let i = 0; i <= steps; i++) {
+      const t = i / steps;
+      const interp = v1.clone().lerp(v2, t).normalize().multiplyScalar(1.04);
+      points.push(interp);
+    }
+    const curve = new THREE.CatmullRomCurve3(points);
+    const curvePoints = curve.getPoints(200);
+    const geometry = new THREE.BufferGeometry().setFromPoints(curvePoints);
+    return geometry;
+  }, [routeLine]);
+
+  const geoHalo = useMemo(() => {
+    if (!routeLine) return null;
+    const [[lat1, lng1], [lat2, lng2]] = routeLine;
+    const v1 = latLngToVec3(lat1, lng1, 1.0).normalize();
+    const v2 = latLngToVec3(lat2, lng2, 1.0).normalize();
+    const steps = 100;
+    const points: THREE.Vector3[] = [];
+    for (let i = 0; i <= steps; i++) {
+      const t = i / steps;
+      const interp = v1.clone().lerp(v2, t).normalize().multiplyScalar(1.042);
+      points.push(interp);
+    }
+    const curve = new THREE.CatmullRomCurve3(points);
+    const curvePoints = curve.getPoints(200);
+    const geometry = new THREE.BufferGeometry().setFromPoints(curvePoints);
+    return geometry;
+  }, [routeLine]);
+
+  if (!geo || !geoHalo) return null;
+
+  return (
+    <>
+      <primitive
+        object={
+          new THREE.Line(
+            geo,
+            new THREE.LineBasicMaterial({
+              color: 0x00ffff,
+              linewidth: 2,
+              transparent: true,
+              opacity: 0.9,
+            }),
+          )
+        }
+      />
+      <primitive
+        object={
+          new THREE.Line(
+            geoHalo,
+            new THREE.LineBasicMaterial({
+              color: 0xffffff,
+              linewidth: 4,
+              transparent: true,
+              opacity: 0.4,
+            }),
+          )
+        }
+      />
+    </>
   );
 }
 
@@ -697,6 +780,7 @@ function GlobeScene({
   targetZoom,
   onZoomChange,
   userLocation,
+  routeLine,
 }: EarthProps) {
   const { camera, gl } = useThree();
   const drag = useRef<GlobeDragState>({
@@ -709,6 +793,24 @@ function GlobeScene({
     velY: 0,
   });
   const groupRef2 = useRef<THREE.Group>(null);
+  const flyToTarget = useRef<{
+    rotX: number;
+    rotY: number;
+    zoom: number;
+  } | null>(null);
+
+  // Fly to monument when selected
+  useEffect(() => {
+    if (!selectedMonument) return;
+    const lat = selectedMonument.latitude;
+    const lng = selectedMonument.longitude;
+    const targetRotX = -lat * (Math.PI / 180);
+    const targetRotY = -(lng + 90) * (Math.PI / 180);
+    flyToTarget.current = { rotX: targetRotX, rotY: targetRotY, zoom: 2.0 };
+    // Stop auto-spin during fly
+    drag.current.velX = 0;
+    drag.current.velY = 0;
+  }, [selectedMonument]);
 
   useEffect(() => {
     const canvas = gl.domElement;
@@ -827,6 +929,24 @@ function GlobeScene({
 
   useFrame(() => {
     if (!groupRef2.current) return;
+    // Fly-to animation: smoothly rotate globe to selected monument
+    if (flyToTarget.current && !drag.current.dragging) {
+      const ft = flyToTarget.current;
+      const lerpSpeed = 0.08;
+      drag.current.rotX += (ft.rotX - drag.current.rotX) * lerpSpeed;
+      // Normalize rotY difference to avoid long-way-around rotation
+      let dY = ft.rotY - drag.current.rotY;
+      while (dY > Math.PI) dY -= 2 * Math.PI;
+      while (dY < -Math.PI) dY += 2 * Math.PI;
+      drag.current.rotY += dY * lerpSpeed;
+      if (targetZoom) targetZoom.current = ft.zoom;
+      if (
+        Math.abs(ft.rotX - drag.current.rotX) < 0.005 &&
+        Math.abs(dY) < 0.005
+      ) {
+        flyToTarget.current = null;
+      }
+    }
     if (!drag.current.dragging) {
       drag.current.velX *= 0.95;
       drag.current.velY *= 0.95;
@@ -859,6 +979,7 @@ function GlobeScene({
         cameraDistance={cameraDistance}
         rotation={rotation}
         userLocation={userLocation}
+        routeLine={routeLine}
       />
     </group>
   );
@@ -870,6 +991,7 @@ interface Globe3DProps {
   selectedMonument: Monument | null;
   onCoordsChange?: (lat: number, lng: number) => void;
   userLocation?: { lat: number; lng: number } | null;
+  routeLine?: [[number, number], [number, number]] | null;
 }
 
 const LEGEND_ITEMS = [
@@ -1110,6 +1232,7 @@ export function Globe3D({
   selectedMonument,
   onCoordsChange,
   userLocation,
+  routeLine,
 }: Globe3DProps) {
   const [hoveredMonument, setHoveredMonument] = useState<Monument | null>(null);
   const cameraDistance = useRef(2.5);
@@ -1153,6 +1276,7 @@ export function Globe3D({
             targetZoom={targetZoom}
             onZoomChange={setSliderZoom}
             userLocation={userLocation}
+            routeLine={routeLine}
           />
         </Suspense>
       </Canvas>

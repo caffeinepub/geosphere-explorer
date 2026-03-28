@@ -159,6 +159,11 @@ function AppContent() {
                       selectedMonument={selectedMonument}
                       onCoordsChange={handleCoordsChange}
                       userLocation={userLocation}
+                      routeLine={
+                        routeCoords && routeCoords.length >= 2
+                          ? [routeCoords[0], routeCoords[1]]
+                          : null
+                      }
                     />
                   ) : (
                     <MapView
