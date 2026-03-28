@@ -1057,8 +1057,7 @@ function ZoomSlider({
       style={{
         position: "absolute",
         left: "16px",
-        top: "50%",
-        transform: "translateY(-50%)",
+        top: "62px",
         zIndex: 40,
         display: "flex",
         flexDirection: "column",
