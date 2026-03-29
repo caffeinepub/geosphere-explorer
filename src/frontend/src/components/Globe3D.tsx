@@ -508,6 +508,29 @@ function MonumentPin({ monument, onHover, onClick, isSelected }: PinProps) {
         roughness={0.3}
         metalness={0.2}
       />
+      {(hovered || isSelected) && (
+        <Html center position={[0, 0.04, 0]} style={{ pointerEvents: "none" }}>
+          <div
+            style={{
+              background: "rgba(8, 16, 28, 0.92)",
+              color: "#ffffff",
+              fontSize: "9px",
+              fontWeight: "600",
+              fontFamily: "Inter, sans-serif",
+              padding: "3px 7px",
+              borderRadius: "10px",
+              whiteSpace: "nowrap",
+              pointerEvents: "none",
+              border: "1px solid rgba(244, 178, 60, 0.6)",
+              boxShadow:
+                "0 0 6px rgba(244, 178, 60, 0.25), 0 2px 8px rgba(0,0,0,0.6)",
+              letterSpacing: "0.02em",
+            }}
+          >
+            {monument.name}
+          </div>
+        </Html>
+      )}
     </mesh>
   );
 }
@@ -804,13 +827,15 @@ function GlobeScene({
     if (!selectedMonument) return;
     const lat = selectedMonument.latitude;
     const lng = selectedMonument.longitude;
-    const targetRotX = -lat * (Math.PI / 180);
+    const targetRotX = lat * (Math.PI / 180);
     const targetRotY = -(lng + 90) * (Math.PI / 180);
-    flyToTarget.current = { rotX: targetRotX, rotY: targetRotY, zoom: 2.0 };
+    flyToTarget.current = { rotX: targetRotX, rotY: targetRotY, zoom: 1.2 };
+    if (targetZoom) targetZoom.current = 1.6;
+    if (onZoomChange) onZoomChange(1.6);
     // Stop auto-spin during fly
     drag.current.velX = 0;
     drag.current.velY = 0;
-  }, [selectedMonument]);
+  }, [selectedMonument, targetZoom, onZoomChange]);
 
   useEffect(() => {
     const canvas = gl.domElement;
@@ -945,6 +970,8 @@ function GlobeScene({
         Math.abs(dY) < 0.005
       ) {
         flyToTarget.current = null;
+        if (targetZoom) targetZoom.current = 1.6;
+        if (onZoomChange) onZoomChange(1.6);
       }
     }
     if (!drag.current.dragging) {
@@ -1234,7 +1261,7 @@ export function Globe3D({
   userLocation,
   routeLine,
 }: Globe3DProps) {
-  const [hoveredMonument, setHoveredMonument] = useState<Monument | null>(null);
+  const [, setHoveredMonument] = useState<Monument | null>(null);
   const cameraDistance = useRef(2.5);
   const rotation = useRef({ x: 0.3, y: 0 });
   const containerRef = useRef<HTMLDivElement>(null);
@@ -1286,19 +1313,6 @@ export function Globe3D({
         targetZoom={targetZoom}
         setSliderZoom={setSliderZoom}
       />
-      {hoveredMonument && (
-        <div
-          className="absolute pointer-events-none z-30 px-3 py-2 glass-panel rounded-lg text-sm"
-          style={{ top: "20%", left: "50%", transform: "translateX(-50%)" }}
-        >
-          <div className="font-semibold" style={{ color: "#F4B23C" }}>
-            {hoveredMonument.name}
-          </div>
-          <div className="text-xs" style={{ color: "#A9B6C9" }}>
-            {hoveredMonument.city}, {hoveredMonument.country}
-          </div>
-        </div>
-      )}
     </div>
   );
 }

@@ -8566,4 +8566,49 @@ export const LOCAL_MONUMENTS: Monument[] = [
     imageUrl:
       "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/National_Museum_New_Delhi.jpg/800px-National_Museum_New_Delhi.jpg",
   },
+  {
+    id: 1462,
+    name: "Dubai Frame",
+    city: "Dubai",
+    country: "UAE",
+    latitude: 25.235,
+    longitude: 55.3006,
+    category: "Monument",
+    description:
+      "The Dubai Frame is a landmark 150-metre tall picture frame-shaped tower located in Zabeel Park. It offers panoramic views of old Dubai on one side and the modern skyline on the other, symbolizing the bridge between the city's past and future.",
+    history:
+      "Designed by Mexican architect Fernando Donis and completed in 2018, the Dubai Frame was conceived as part of Dubai's vision to celebrate its history while looking toward the future. The glass-floored sky bridge connecting the two towers at the top offers a breathtaking 360-degree view of the city.",
+    imageUrl:
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Dubai_Frame_-_2019.jpg/800px-Dubai_Frame_-_2019.jpg",
+  },
+  {
+    id: 1463,
+    name: "Burj Al Arab",
+    city: "Dubai",
+    country: "UAE",
+    latitude: 25.1412,
+    longitude: 55.1853,
+    category: "Monument",
+    description:
+      "The Burj Al Arab is one of the most luxurious and iconic hotels in the world, standing 321 metres tall on its own artificial island. Its sail-shaped silhouette has become the symbol of modern Dubai.",
+    history:
+      "Built by Atkins and completed in 1999, the Burj Al Arab was designed to be a symbol of Dubai's rapid development and ambition. The hotel is built on a man-made island connected to the mainland by a private bridge, and features 202 duplex suites, a helipad, and several world-class restaurants including the underwater Al Mahara.",
+    imageUrl:
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/BurjAlArab_2015.jpg/800px-BurjAlArab_2015.jpg",
+  },
+  {
+    id: 1464,
+    name: "Museum of the Future",
+    city: "Dubai",
+    country: "UAE",
+    latitude: 25.2197,
+    longitude: 55.2814,
+    category: "Museum",
+    description:
+      "The Museum of the Future is one of the most beautiful and innovative buildings in the world. The torus-shaped structure features Arabic calligraphy carved into its facade and explores future technologies, space exploration, and human innovation.",
+    history:
+      "Opened in February 2022, the Museum of the Future was built to realize the vision of Sheikh Mohammed bin Rashid Al Maktoum. Designed by Killa Design, the building has no columns internally — its hollow toroid shape is entirely supported by its steel-clad exterior. The museum hosts immersive exhibitions about the future of humanity, climate, and technology.",
+    imageUrl:
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Museum_of_the_Future_Dubai_2022.jpg/800px-Museum_of_the_Future_Dubai_2022.jpg",
+  },
 ];
